@@ -315,7 +315,18 @@ public class HomeActivity extends AppCompatActivity {
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
                         //Toast.makeText(HomeActivity.this, "You clicked on 'YES' button", Toast.LENGTH_SHORT).show();
+                        stop.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //mediaPlayer.stop();
+                                //Toast.makeText(HomeActivity.this, "You clicked on 'EXIT' button", Toast.LENGTH_SHORT).show();
+                                HomeActivity.this.onDestroy();
 
+                                mediaPlayer.release();
+                                // HomeActivity.this.finish();
+                            }
+
+                        });
 
 
                         finish();
@@ -347,7 +358,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
+              /*Hi chachu*/
 
 
 
