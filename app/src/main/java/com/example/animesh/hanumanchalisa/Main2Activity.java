@@ -1,5 +1,10 @@
 package com.example.animesh.hanumanchalisa;
 
+
+//gfjhggggggggggggggggggggggggggggggggggggggggggggggggggggghghjgjgjgj
+
+
+
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +35,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-/***aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa***/
+
 
     }
 }
