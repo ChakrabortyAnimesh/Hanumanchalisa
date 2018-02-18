@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     public MediaPlayer mediaPlayer;
     Handler handler;
     public Button play;
-public ViewPager viewPager;
+    public ViewPager viewPager;
 
     private View mPendulum,mPendulum2,ghanta,imageanimation;
 
@@ -60,16 +60,22 @@ public ViewPager viewPager;
     private int[] imagearray;
     private ViewFlipper viewFlipper;
     private Toolbar toolbar;
+    int[] sliderImageId = new int[]{
+            R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
+    };
 
 
     private ImageView btnPrev,btnNext;
+    private WallpaperManager myWallpaperManager;
+    private int position;
+    private ViewPager mViewPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.add);
+        mViewPager = (ViewPager) findViewById(R.id.add);
         ImageAdapter adapterView = new ImageAdapter(this);
         mViewPager.setAdapter(adapterView);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -434,7 +440,39 @@ public ViewPager viewPager;
 
         });
 
+        //page selection callback listner
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int arg0) {
+                // TODO Auto-generated method stub
+                //Here you can set the wallpaper
+               position =arg0;
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
     }
+
+
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mymenu, menu);
@@ -447,52 +485,21 @@ public ViewPager viewPager;
             case R.id.hanuman:
                 Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
 
-              //  WallpaperManager myWallpaperManager
-                //        = WallpaperManager.getInstance(getApplicationContext());
-              /* try {
-                    myWallpaperManager.setBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.hanuman));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }*/
-
-                // TODO Auto-generated method stub
-                WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-                try {
-                    int[] sliderImageId = new int[]{
-                            R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
-                    };
-
-
-                    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                        @Override
-                        public void onPageSelected(int arg0) {
-                            // TODO Auto-generated method stub
-                            //Here you can set the wallpaper
-                           // position=arg0;
-
-                        }
-
-                        @Override
-                        public void onPageScrolled(int arg0, float arg1, int arg2) {
-                            // TODO Auto-generated method stub
-
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int arg0) {
-                            // TODO Auto-generated method stub
-
-                        }
-                    });
-                    int position=0;
-                    myWallpaperManager.setResource(sliderImageId[position]);
-
+                WallpaperManager myWallpaperManager
+                        = WallpaperManager.getInstance(getApplicationContext());
+               try {
+                   myWallpaperManager.setBitmap(BitmapFactory.decodeResource(getResources(),sliderImageId[position]));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
+                // TODO Auto-generated method stub
+                //myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
+
+
+
 
                 break;
 
@@ -582,8 +589,6 @@ public ViewPager viewPager;
                 })
                 .show();
     }
-
-
 
 
 
