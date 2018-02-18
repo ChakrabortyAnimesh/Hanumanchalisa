@@ -460,7 +460,7 @@ public ViewPager viewPager;
                 try {
 
 
-                    myWallpaperManager.setResource(sliderImageId[position]);
+                    myWallpaperManager.setResource(R.id.hanuman);
                     /*if(viewFlipper.equals(R.id.imagefirst)) {
                         myWallpaperManager.setResource(R.drawable.hanuman);
                     }
