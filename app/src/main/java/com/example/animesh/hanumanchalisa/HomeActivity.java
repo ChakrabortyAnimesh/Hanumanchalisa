@@ -86,7 +86,7 @@ ViewPager viewPager;
 
         ViewPager ViewPager = (ViewPager) findViewById(R.id.add);
 
-        ImageAdapter adapterView = new ImageAdapter(this);
+        ImageAdapter adapterView = new ImageAdapter(this,sliderImageId);
         ViewPager.setAdapter(adapterView);
 
 
