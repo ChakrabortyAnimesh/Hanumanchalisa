@@ -13,10 +13,13 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends PagerAdapter {
     Context mContext;
+     int[] sliderImageId;
 
 
-    ImageAdapter(Context context) {
+
+    ImageAdapter(Context context,int[] sliderImageId) {
         this.mContext = context;
+        this.sliderImageId=sliderImageId;
     }
 
     @Override
@@ -24,10 +27,7 @@ public class ImageAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
-     int[] sliderImageId = new int[]{
-            R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
-    };
-
+    
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView imageView = new ImageView(mContext);
