@@ -459,7 +459,7 @@ public ViewPager viewPager;
                 WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
                 try {
 
-
+//TODO
                     myWallpaperManager.setResource(R.id.hanuman);
                     /*if(viewFlipper.equals(R.id.imagefirst)) {
                         myWallpaperManager.setResource(R.drawable.hanuman);
