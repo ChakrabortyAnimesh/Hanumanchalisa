@@ -33,6 +33,7 @@ import java.io.IOException;
 
 
 public class HomeActivity extends AppCompatActivity {
+    //int position=0;
 
   //  boolean  pressed;
   public ImageView imageViewshankh;
@@ -45,7 +46,10 @@ public class HomeActivity extends AppCompatActivity {
     public MediaPlayer mediaPlayer;
     Handler handler;
     public Button play;
-    public ViewPager viewPager;
+
+
+ViewPager viewPager;
+
 
     private View mPendulum,mPendulum2,ghanta,imageanimation;
 
@@ -75,16 +79,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         mViewPager = (ViewPager) findViewById(R.id.add);
+
+
+
+        ViewPager ViewPager = (ViewPager) findViewById(R.id.add);
+
         ImageAdapter adapterView = new ImageAdapter(this);
-        mViewPager.setAdapter(adapterView);
+        ViewPager.setAdapter(adapterView);
+
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // toolbar.setLogo(R.drawable.omlogo);
 
-       // toolbar.setVisibility(View.GONE);
-       // toolbar.setBackgroundResource(R.drawable.hanuman);
-        //toolbar.setTitle(R.string.app_name);
         songarry = new int[]{R.raw.aaa,R.raw.mannmeraandir,R.raw.chaloshivala,R.raw.shivshankarkojisne};
         mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[0]);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -127,9 +136,11 @@ public class HomeActivity extends AppCompatActivity {
         imageanimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mediaPlayer1.start();
-                    mPendulum.startAnimation(mAnimation);
 
+                    mediaPlayer1.start();
+
+                    mPendulum.startAnimation(mAnimation);
+          
 
             }
         });
@@ -146,9 +157,10 @@ public class HomeActivity extends AppCompatActivity {
         ghanta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mediaPlayerghanta.start();
+
                 ghanta.startAnimation(gAnimation);
+
             }
         });
        /* mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -483,7 +495,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.hanuman:
-                Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
+
 
                 WallpaperManager myWallpaperManager
                         = WallpaperManager.getInstance(getApplicationContext());
@@ -495,13 +507,64 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 // TODO Auto-generated method stub
+
                 //myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
 
 
 
 
+
+              //  WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
+                //***************************************************************************************************************************
+
+
+
+                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+                    @Override
+                    public void onPageSelected(int arg0) {
+                        // TODO Auto-generated method stub
+                        //Here you can set the wallpaper
+                        position=arg0;
+
+                    }
+
+                    @Override
+                    public void onPageScrolled(int arg0, float arg1, int arg2) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+                int[] sliderImageId = new int[]{
+                        R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
+                };
+
+                try {
+
+
+
+
+                    myWallpaperManager.setResource(sliderImageId[position]);
+                    Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
+
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
                 break;
+
+
+
+
+                //************************************************************************************************************************
 
                 /*
                 **       set as wallpaper

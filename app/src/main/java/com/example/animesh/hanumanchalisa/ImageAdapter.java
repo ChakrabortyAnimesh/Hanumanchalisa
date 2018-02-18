@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends PagerAdapter {
     Context mContext;
-    int position=0;
+
 
     ImageAdapter(Context context) {
         this.mContext = context;
