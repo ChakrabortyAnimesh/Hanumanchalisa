@@ -1,14 +1,24 @@
 package com.example.animesh.hanumanchalisa;
-//1111111111111111115555555555555555555555444444444444444446666666666666666666666664444444444444jj5445444
+
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.app.WallpaperManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,184 +26,277 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+import java.io.IOException;
 
 
 public class HomeActivity extends AppCompatActivity {
 
+  //  boolean  pressed;
+  public ImageView imageViewshankh;
+  //  private int duration;
+    boolean  pressed;
 
+    private int duration;
     boolean isbuttonon =false;
     SeekBar seekBar;
     public MediaPlayer mediaPlayer;
     Handler handler;
-    Runnable runnable;
     public Button play;
-    public   Button pause;
+public ViewPager viewPager;
 
-   public Button stop;
-    private View mPendulum,mPendulum2;
+    private View mPendulum,mPendulum2,ghanta,imageanimation;
 
     private Animation mAnimation;
-    ImageView img1,img2,img3,img4,img5,img6;
+    private Animation gAnimation;
+
     Button but;
-    ObjectAnimator objectanimator1, objectanimator2, objectanimator3, objectanimator4, objectanimator5, objectanimator6;
+
+    private ImageView nextButton;
+    private int counter=0;
+    private int[] songarry;
+    private int[] imagearray;
+    private ViewFlipper viewFlipper;
+    private Toolbar toolbar;
+
+
+    private ImageView btnPrev,btnNext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.add);
+        ImageAdapter adapterView = new ImageAdapter(this);
+        mViewPager.setAdapter(adapterView);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+       // toolbar.setLogo(R.drawable.omlogo);
+
+       // toolbar.setVisibility(View.GONE);
+       // toolbar.setBackgroundResource(R.drawable.hanuman);
+        //toolbar.setTitle(R.string.app_name);
+        songarry = new int[]{R.raw.aaa,R.raw.mannmeraandir,R.raw.chaloshivala,R.raw.shivshankarkojisne};
+        mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[0]);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_more_vert_black_24dp));
+        ImageView imagehanuman = (ImageView)findViewById(R.id.hanuman);
+
+       /* ImageView imagefirst = (ImageView) findViewById(R.id.image1);
+        ImageView imagesecond = (ImageView) findViewById(R.id.image2);*/
+       // final SeekBar seekBar = (SeekBar)  findViewById(R.id.seekbar);
 
 
-        /*********************************    Flower falling  ***************************** */
-         img1 = (ImageView)findViewById(R.id.imageView1);
-         img2 = (ImageView)findViewById(R.id.imageView2);
-         img3 = (ImageView)findViewById(R.id.imageView3);
-         img4 = (ImageView)findViewById(R.id.imageView4);
-         img5 = (ImageView)findViewById(R.id.imageView5);
-         img6 = (ImageView)findViewById(R.id.imageView6);
-
-        but = (Button)findViewById(R.id.button1);
-
-         objectanimator1 = ObjectAnimator.ofFloat(img1,"y",3000);
-        objectanimator2 = ObjectAnimator.ofFloat(img2,"y",3500);
-         objectanimator3 = ObjectAnimator.ofFloat(img3,"y",4000);
-         objectanimator4 = ObjectAnimator.ofFloat(img4,"y",4500);
-           objectanimator5 = ObjectAnimator.ofFloat(img5,"y",4000);
-         objectanimator6 = ObjectAnimator.ofFloat(img6,"y",3000);
 
 
-        but.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                     objectanimator1.setDuration(8000);
-                   objectanimator2.setDuration(9000);
-                   objectanimator3.setDuration(8000);
-                 objectanimator4.setDuration(7000);
-                objectanimator5.setDuration(9000);
-                   objectanimator6.setDuration(8000);
-
-                objectanimator1.start();
-                objectanimator2.start();
-                objectanimator3.start();
-                objectanimator4.start();
-                objectanimator5.start();
-                objectanimator6.start();
 
 
-            }
-        });
+
+
 
 
         /* ********************************   Bell ringing  ***************************** */
-        final MediaPlayer mediaPlayer1 = MediaPlayer.create(HomeActivity.this,R.raw.templebell);
+        final MediaPlayer mediaPlayer1 = MediaPlayer.create(HomeActivity.this,R.raw.templebell1);
         final MediaPlayer mediaPlayer12 = MediaPlayer.create(HomeActivity.this,R.raw.templebell2);
-
-
-
-        mPendulum = findViewById(R.id.bell1);
+        final MediaPlayer mediaPlayerghanta = MediaPlayer.create(HomeActivity.this, R.raw.handbellsound);
         mPendulum2 = findViewById(R.id.bell12);
-
+        mPendulum=findViewById(R.id.bell1);
+        ghanta = findViewById(R.id.ghanta);
 
 
 
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.animation);
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.animation);
+        gAnimation = AnimationUtils.loadAnimation(this, R.anim.animationa);
 
 
-        ImageView imageanimation = (ImageView) findViewById(R.id.bell1);
+       ImageView imageanimation = (ImageView) findViewById(R.id.bell1);
         ImageView imageanim = (ImageView) findViewById(R.id.bell12);
+       final   ImageView ghanta = (ImageView) findViewById(R.id.ghanta);
+
 
         imageanimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    mediaPlayer1.start();
                     mPendulum.startAnimation(mAnimation);
 
-                    mediaPlayer1.start();
 
             }
         });
-
 
         imageanim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer12.start();
                 mPendulum2.startAnimation(mAnimation);
 
+            }
 
-                mediaPlayer12.start();
+        });
+        ghanta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                mediaPlayerghanta.start();
+                ghanta.startAnimation(gAnimation);
             }
         });
+       /* mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+
+            }
+        });*/
 
         //*********************************   Seekbar ***************************** *//*
 
        handler = new Handler();
-        seekBar = (SeekBar) findViewById(R.id.seekBar2);
+        //seekBar = (SeekBar) findViewById(R.id.seekBar2);
 
-        Button stop = (Button) findViewById(R.id.stop);
+       // Button stop = (Button) findViewById(R.id.stop);
 
        play = (Button) findViewById(R.id.play123);
-        mediaPlayer = MediaPlayer.create(HomeActivity.this, R.raw.aaa);
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.pause();
+                counter--;
+                mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[counter]);
+                mediaPlayer.start();
+            }
+        });
+
+*/
+
+
+
+
+
+
+
+
+
+     /*   nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                counter++;
+
+                if(counter==songarry.length){
+                    counter=0;
+                }
+
+
+                if (mediaPlayer.isPlaying()) {
+                    playSong(counter);
+
+                }
+
+            }
+        });*/
         /*********************************   Main media player ***************************** */
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
+
                     play.setBackgroundResource(R.drawable.bestplay);
                 }
-
-
                 else {
-
+                   // counter = 0;
+                    mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[counter]);
                     mediaPlayer.start();
-
                     play.setBackgroundResource(R.drawable.bestpause);
-
                 }
-                //playcycle();
-                //Toast.makeText(HomeActivity.this, "You clicked on 'PLAY' button", Toast.LENGTH_SHORT).show();
-
             }
         });
 
-        stop.setOnClickListener(new View.OnClickListener() {
+     /*   stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mediaPlayer.stop();
-                //Toast.makeText(HomeActivity.this, "You clicked on 'EXIT' button", Toast.LENGTH_SHORT).show();
-                HomeActivity.this.onDestroy();
+               // mediaPlayer.stop();
+               // Toast.makeText(HomeActivity.this, "You clicked on 'EXIT' button", Toast.LENGTH_SHORT).show();
+               // HomeActivity.this.onDestroy();
 
                 mediaPlayer.release();
-                // HomeActivity.this.finish();
+                 HomeActivity.this.finish();
             }
 
         });
+*/
 
 
 
-        final ImageView imageView = (ImageView) findViewById(R.id.image);
 
-
-        /*********************************   Repeat button ***************************** */
-
-        imageView.setOnClickListener(new View.OnClickListener() {
+        /*********************************   Next button ***************************** */
+        btnNext = (ImageView) findViewById(R.id.btnNext);
+        btnPrev = (ImageView) findViewById(R.id.btnPrev);
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isbuttonon){
-                    imageView.setImageResource(R.drawable.repeatbuttonoff);
-                    isbuttonon=false;
 
-                    Toast.makeText(HomeActivity.this, "Repeat off", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    imageView.setImageResource(R.drawable.repeatbutton);
-
-                    isbuttonon=true;
-                    Toast.makeText(HomeActivity.this, "Repeat on", Toast.LENGTH_SHORT).show();
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.reset();
+                    counter++;
+                    if (counter > songarry.length-1) {
+                        counter = 0;
+                    }
+                    mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[counter]);
+                    mediaPlayer.start();
                 }
             }
         });
+
+        /********************************* Prev button *********************************/
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.reset();
+                    counter--;
+                    if (counter <0) {
+                        counter=songarry.length-1;
+                    }
+                    mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[counter]);
+                    mediaPlayer.start();
+                }
+
+            }
+        });
+
+        /********************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /*********************************  Seekbar   ********************************* */
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -201,6 +304,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onCompletion(final MediaPlayer mediaPlayer) {
                 if(isbuttonon){
                    // mediaPlayer.reset();
+
 
 
                     mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -255,7 +359,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //private Handler mHandler = new Handler();
 //Make sure you update Seekbar on UI thread
-        HomeActivity.this.runOnUiThread(new Runnable() {
+      /*  HomeActivity.this.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
@@ -265,7 +369,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 handler.postDelayed(this, 1000);
             }
-        });
+        });*/
 
 
 
@@ -279,15 +383,136 @@ public class HomeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(HomeActivity.this, "You clicked on 'TEXT' button", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(HomeActivity.this, "You clicked on 'TEXT' button", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this, Main2Activity.class);
                 startActivity(i);
             }
         });
+
+
+
+
+
+
+
+        pressed=false;
+      final MediaPlayer mp = MediaPlayer.create(HomeActivity.this,R.raw.shankh_sound);
+
+        imageViewshankh= (ImageView) findViewById(R.id.shankh);
+
+        final Animation zoom = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.zoom);
+        final Animation shrink = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.shrink);
+
+
+        imageViewshankh.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                imageViewshankh.startAnimation(zoom);
+                duration =mp.getDuration();
+                mp.start();
+                zoom.setDuration(duration/2);
+                zoom.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        shrink.setDuration(duration/2);
+                        imageViewshankh.startAnimation(shrink);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+
+            }
+
+        });
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.hanuman:
+                Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
+
+              //  WallpaperManager myWallpaperManager
+                //        = WallpaperManager.getInstance(getApplicationContext());
+              /* try {
+                    myWallpaperManager.setBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.hanuman));
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }*/
+
+                // TODO Auto-generated method stub
+                WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+                try {
+
+
+                    myWallpaperManager.setResource(sliderImageId[position]);
+                    /*if(viewFlipper.equals(R.id.imagefirst)) {
+                        myWallpaperManager.setResource(R.drawable.hanuman);
+                    }
+                    if(viewFlipper.equals(R.id.imagesecond)){
+                        myWallpaperManager.setResource(R.drawable.h23);
+                    }*/
+                   //
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+                break;
+
+                /*
+                **       set as wallpaper
+                 */
+            case R.id.menu_item_share:
+                shareIt();
+                break;
+
+            case R.id.hanumanwiki:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://en.wikipedia.org/wiki/Hanuman"));
+                startActivity(intent);
+                break;
+            case R.id.about:
+                new AlertDialog.Builder(this).setMessage("Hanuman Chalisa 5.5 By Animemsh Chakraborty").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show().setCancelable(false);
+
+
+            default:
+                break;
+        }
+        return true;
     }
 
+    private void playSong(int index) {
+        try {
+            mediaPlayer.reset();
+            mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[index]);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
+    }
 
 
     /*********************************    Back space alert dialog  ***************************** */
@@ -315,27 +540,11 @@ public class HomeActivity extends AppCompatActivity {
 
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
-                        //Toast.makeText(HomeActivity.this, "You clicked on 'YES' button", Toast.LENGTH_SHORT).show();
-                        stop.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //mediaPlayer.stop();
-                                //Toast.makeText(HomeActivity.this, "You clicked on 'EXIT' button", Toast.LENGTH_SHORT).show();
-                                HomeActivity.this.onDestroy();
-
-                                mediaPlayer.release();
-                                // HomeActivity.this.finish();
-                            }
-
-                        });
-
-
+                       // Toast.makeText(HomeActivity.this, "You clicked on 'YES' button", Toast.LENGTH_SHORT).show();
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
                         finish();
                         //close();
-
-
-
-
                     }
 
 
@@ -347,25 +556,39 @@ public class HomeActivity extends AppCompatActivity {
 
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(HomeActivity.this, "You clicked on 'NO' button", Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .show();
-
-
-
-
-
-
-
-
-              /*Hi chachu*/
-
-
-
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void shareIt() {
+//sharing implementation here
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Hanuman Chalisa (HD Audio)-");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hey! Check out this app Hanuman Chalisa app! https://www.blogger.com/blogger.g?blogID=4986461104042452215#allposts/ ");
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 }
 
 

@@ -1,7 +1,6 @@
 package com.example.animesh.hanumanchalisa;
 
 
-//gfjhggggggggggggggggggggggggggggggggggggggggggggggggggggghghjg
 
 
 
@@ -31,7 +30,7 @@ public class Main2Activity extends AppCompatActivity {
 
         WebView webView = (WebView) findViewById(R.id.web);
         webView.loadUrl("file:///android_asset/hi.html");
-       // webView.getSettings().setJavaScriptEnabled(true);
+       //webView.getSettings().setJavaScriptEnabled(true);
 
 
 
