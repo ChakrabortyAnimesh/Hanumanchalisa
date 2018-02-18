@@ -503,50 +503,14 @@ ViewPager viewPager;
                         = WallpaperManager.getInstance(getApplicationContext());
                try {
                    myWallpaperManager.setBitmap(BitmapFactory.decodeResource(getResources(),sliderImageId[position]));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-                // TODO Auto-generated method stub
-
-                viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-                    @Override
-                    public void onPageSelected(int arg0) {
-                        // TODO Auto-generated method stub
-                        //Here you can set the wallpaper
-                        position=arg0;
-                    }
-
-                    @Override
-                    public void onPageScrolled(int arg0, float arg1, int arg2) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void onPageScrollStateChanged(int arg0) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-                         int[] sliderImageId = new int[]{
-                        R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
-                };
-
-                try {
-                    myWallpaperManager.setResource(sliderImageId[position]);
-                    Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
-
+                   Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 break;
 
-                /*
-                **       set as wallpaper
-                 */
+    
             case R.id.menu_item_share:
                 shareIt();
                 break;
