@@ -80,7 +80,7 @@ ViewPager viewPager;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mViewPager = (ViewPager) findViewById(R.id.add);
+        viewPager = (ViewPager) findViewById(R.id.add);
 
 
 
@@ -508,14 +508,14 @@ ViewPager viewPager;
 
                 // TODO Auto-generated method stub
 
-                //myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+               // myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
 
 
 
 
 
-              //  WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+              // WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
                 //***************************************************************************************************************************
 
