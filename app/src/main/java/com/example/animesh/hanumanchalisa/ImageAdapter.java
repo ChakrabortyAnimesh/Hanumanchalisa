@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends PagerAdapter {
     Context mContext;
+    int position=0;
 
     ImageAdapter(Context context) {
         this.mContext = context;
@@ -23,7 +24,7 @@ public class ImageAdapter extends PagerAdapter {
         return view == ((ImageView) object);
     }
 
-    public int[] sliderImageId = new int[]{
+     int[] sliderImageId = new int[]{
             R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
     };
 
@@ -45,4 +46,5 @@ public class ImageAdapter extends PagerAdapter {
     public int getCount() {
         return sliderImageId.length;
     }
+
 }

@@ -20,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -458,16 +459,36 @@ public ViewPager viewPager;
                 // TODO Auto-generated method stub
                 WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
                 try {
+                    int[] sliderImageId = new int[]{
+                            R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
+                    };
 
-//TODO
-                    myWallpaperManager.setResource(R.id.hanuman);
-                    /*if(viewFlipper.equals(R.id.imagefirst)) {
-                        myWallpaperManager.setResource(R.drawable.hanuman);
-                    }
-                    if(viewFlipper.equals(R.id.imagesecond)){
-                        myWallpaperManager.setResource(R.drawable.h23);
-                    }*/
-                   //
+
+                    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+                        @Override
+                        public void onPageSelected(int arg0) {
+                            // TODO Auto-generated method stub
+                            //Here you can set the wallpaper
+                           // position=arg0;
+
+                        }
+
+                        @Override
+                        public void onPageScrolled(int arg0, float arg1, int arg2) {
+                            // TODO Auto-generated method stub
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int arg0) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+                    int position=0;
+                    myWallpaperManager.setResource(sliderImageId[position]);
+
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
