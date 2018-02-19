@@ -94,7 +94,7 @@ ViewPager viewPager;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        songarry = new int[]{R.raw.aaa,R.raw.mannmeraandir,R.raw.chaloshivala,R.raw.shivshankarkojisne};
+        songarry = new int[]{R.raw.aaa,R.raw.gayatrimantra,R.raw.chaloshivala};
         mediaPlayer = MediaPlayer.create(HomeActivity.this, songarry[0]);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.ic_more_vert_black_24dp));
@@ -114,9 +114,9 @@ ViewPager viewPager;
 
 
         /* ********************************   Bell ringing  ***************************** */
-        final MediaPlayer mediaPlayer1 = MediaPlayer.create(HomeActivity.this,R.raw.templebell1);
-        final MediaPlayer mediaPlayer12 = MediaPlayer.create(HomeActivity.this,R.raw.templebell2);
-        final MediaPlayer mediaPlayerghanta = MediaPlayer.create(HomeActivity.this, R.raw.handbellsound);
+        final MediaPlayer mediaPlayer1 = MediaPlayer.create(HomeActivity.this,R.raw.templebellandoid);
+        final MediaPlayer mediaPlayer12 = MediaPlayer.create(HomeActivity.this,R.raw.templebellandoid);
+        final MediaPlayer mediaPlayerghanta = MediaPlayer.create(HomeActivity.this, R.raw.handbellsoundandroid);
         mPendulum2 = findViewById(R.id.bell12);
         mPendulum=findViewById(R.id.bell1);
         ghanta = findViewById(R.id.ghanta);
@@ -402,7 +402,6 @@ ViewPager viewPager;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Toast.makeText(HomeActivity.this, "You clicked on 'TEXT' button", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this, Main2Activity.class);
                 startActivity(i);
             }
@@ -497,6 +496,9 @@ ViewPager viewPager;
             case R.id.hanuman:
 
 
+                /*********************************   Set as Wallpaper ***************************** */
+
+
                 WallpaperManager myWallpaperManager
                         = WallpaperManager.getInstance(getApplicationContext());
                try {
@@ -508,26 +510,12 @@ ViewPager viewPager;
 
                 // TODO Auto-generated method stub
 
-               // myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-
-
-
-
-
-
-              // WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-
-                //***************************************************************************************************************************
-
-
-
                 viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
                     @Override
                     public void onPageSelected(int arg0) {
                         // TODO Auto-generated method stub
                         //Here you can set the wallpaper
                         position=arg0;
-
                     }
 
                     @Override
@@ -542,15 +530,11 @@ ViewPager viewPager;
 
                     }
                 });
-                int[] sliderImageId = new int[]{
+                         int[] sliderImageId = new int[]{
                         R.drawable.hanuman,R.drawable.hanuman1,R.drawable.h24,R.drawable.h25,R.drawable.h28, R.drawable.hanumanbest
                 };
 
                 try {
-
-
-
-
                     myWallpaperManager.setResource(sliderImageId[position]);
                     Toast.makeText(this, " Wallpaper set successfully", Toast.LENGTH_LONG).show();
 
@@ -558,13 +542,7 @@ ViewPager viewPager;
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-
                 break;
-
-
-
-
-                //************************************************************************************************************************
 
                 /*
                 **       set as wallpaper
